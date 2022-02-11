@@ -1,0 +1,29 @@
+<!-- <button (click)="onClick()" class="btn">Click me</button> -->
+
+<h1 class="title">{{ people.count }} people</h1>
+
+<div
+  *ngFor="let person of people.results"
+  class="person"
+  (click)="onLogPerson(person)"
+>
+  {{ person.name }}
+</div>
+
+<div style="text-align: center; margin-top: 2rem">
+  <button
+    [ngClass]="page > 0 ? '' : 'btn-inactive'"
+    class="btn"
+    (click)="loadNextPage()"
+  >
+    previous
+  </button>
+  <button class="btn" (click)="loadNextPage()">next</button>
+</div>
+
+<!-- <p>Name: {{ people.results[0].name }}</p>
+<p>Height: {{ people.results[0].height }}</p>
+<p>Mass: {{ people.results[0].mass }}</p> -->
+<!-- <p>Name: {{ people[0].name }}</p>
+<p>Height: {{ people[0].height }}</p>
+<p>Mass: {{ people[0].mass }}</p> -->
