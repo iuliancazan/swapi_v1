@@ -29,19 +29,19 @@ export class PeopleComponent implements OnInit {
 
   loadNextPage(): void {
     if (this.page < this.pageCount) {
-      this.page++;
-      this.peopleService
-        .getPeople(this.people.next)
-        .subscribe((people) => (this.people = people));
+      this.peopleService.getPeople(this.people.next).subscribe((people) => {
+        this.people = people;
+        this.page++;
+      });
     }
   }
 
   loadPreviousPage(): void {
     if (this.page > 0) {
-      this.page--;
-      this.peopleService
-        .getPeople(this.people.previous)
-        .subscribe((people) => (this.people = people));
+      this.peopleService.getPeople(this.people.previous).subscribe((people) => {
+        this.people = people;
+        this.page--;
+      });
     }
   }
 
