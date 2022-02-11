@@ -1,6 +1,8 @@
 <!-- <button (click)="onClick()" class="btn">Click me</button> -->
 
-<h1 class="title">{{ people.count }} people</h1>
+<h1 class="title">
+  {{ people.count }} people (page {{ page }} of {{ pageCount }})
+</h1>
 
 <div
   *ngFor="let person of people.results"
@@ -14,11 +16,17 @@
   <button
     [ngClass]="page > 0 ? '' : 'btn-inactive'"
     class="btn"
-    (click)="loadNextPage()"
+    (click)="loadPreviousPage()"
   >
     previous
   </button>
-  <button class="btn" (click)="loadNextPage()">next</button>
+  <button
+    [ngClass]="page < pageCount ? '' : 'btn-inactive'"
+    class="btn"
+    (click)="loadNextPage()"
+  >
+    next
+  </button>
 </div>
 
 <!-- <p>Name: {{ people.results[0].name }}</p>

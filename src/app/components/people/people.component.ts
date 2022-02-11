@@ -16,30 +16,33 @@ export class PeopleComponent implements OnInit {
     results: [],
   };
   page: number = 0;
-  pages: number = 0;
-  // people: Person[] = [];
+  pageCount: number = 0;
 
   constructor(private peopleService: PeopleService) {}
 
   ngOnInit(): void {
-    this.peopleService
-      .getPeople()
-      .subscribe((people) => (this.people = people));
-    this.pages = this.people.count;
+    this.peopleService.getPeople().subscribe((people) => {
+      this.people = people;
+      this.pageCount = Math.floor(this.people.count / 10);
+    });
   }
 
   loadNextPage(): void {
-    this.page++;
-    this.peopleService
-      .getPeople(this.people.next)
-      .subscribe((people) => (this.people = people));
+    if (this.page < this.pageCount) {
+      this.page++;
+      this.peopleService
+        .getPeople(this.people.next)
+        .subscribe((people) => (this.people = people));
+    }
   }
 
   loadPreviousPage(): void {
-    this.page--;
-    this.peopleService
-      .getPeople(this.people.previous)
-      .subscribe((people) => (this.people = people));
+    if (this.page > 0) {
+      this.page--;
+      this.peopleService
+        .getPeople(this.people.previous)
+        .subscribe((people) => (this.people = people));
+    }
   }
 
   onLogPerson(person: Person): void {
